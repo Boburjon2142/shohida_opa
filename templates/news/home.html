@@ -294,6 +294,32 @@
             </li>
             {% endfor %}
           </ul>
+          {% if ads %}
+            <div class="single_post_content ad-section">
+              <h2 class="ad-section-title"><span>{% trans "Reklama" %}</span></h2>
+              <div class="ad-underline"></div>
+              <div class="ad-slot ad-slot-full">
+                <div class="ad-carousel">
+                  {% for ad in ads %}
+                  <div class="ad-tile">
+                    {% if ad.link %}<a href="{{ ad.link }}" target="_blank" rel="noopener">{% endif %}
+                      <div class="ad-tile-media">
+                        {% if ad.image %}
+                          <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+                        {% else %}
+                          <div class="ad-placeholder">{{ ad.title|slice:":2"|upper }}</div>
+                        {% endif %}
+                      </div>
+                      <div class="ad-tile-body">
+                        <p class="ad-heading">{{ ad.title }}</p>
+                      </div>
+                    {% if ad.link %}</a>{% endif %}
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
         </div>
       </aside>
     </div>

@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import News, Category
+from .models import News, Category, Advertisement
 from django.db.models import Q, Count
 from .forms import CommentForm, ContactForm
 from .utils import notify_telegram
@@ -95,7 +95,8 @@ class HomePageView(ListView):
         context['mahalliy_xabarlar'] = News.published.filter(category__name='Mahalliy').order_by("-publish_time")[:5]
         context['xorij_xabarlari'] = News.published.filter(category__name='Xorij').order_by("-publish_time")[:5]
         context['sport_xabarlari'] = News.published.filter(category__name='Sport').order_by("-publish_time")[:5]
-        context['texnologiya_xabarlari'] = News.published.filter(category__name='Texnologiya').order_by("-publish_time")[:10]
+        context['texnologiya_xabarlari'] = News.published.filter(category__name='Texnologiya').order_by("-publish_time")[:4]
+        context['ads'] = Advertisement.objects.filter(is_active=True).order_by('display_order', '-created_time')[:3]
         return context
 
 

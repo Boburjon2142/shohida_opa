@@ -144,9 +144,9 @@
         <div style="margin-right: 16px;">
             <form method="get" action="{% url 'search_results' %}" class="navbar-form navbar-right" role="search" aria-label="Sayt bo'ylab qidirish">
               <div class="input-group input-group-sm">
-                <input type="text" name="q" class="form-control" placeholder="{% trans 'Qidiruv...' %}" aria-label="{% trans 'Qidiruv' %}"/>
-                <span class="input-group-btn">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <input type="text" name="q" class="form-control" style="margin-top:10px" placeholder="{% trans 'Qidiruv...' %}" aria-label="{% trans 'Qidiruv' %}"/>
+                <span class="input-group-btn" style="margin-top:9.5px">
+                  <button type="submit" class="btn btn-primary" style="height:40px"><i class="fa fa-search"></i></button>
                 </span>
               </div>
             </form>
@@ -289,6 +289,20 @@
     resizeTechSidebar();
     window.addEventListener('resize', resizeTechSidebar);
     window.addEventListener('scroll', resizeTechSidebar, { passive: true });
+  });
+
+  // Ads carousel
+  document.addEventListener('DOMContentLoaded', function () {
+    var adCarousel = document.querySelector('.ad-carousel');
+    if (!adCarousel || !window.jQuery || !jQuery.fn.slick) return;
+    jQuery(adCarousel).slick({
+      dots: true,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 4000,
+      adaptiveHeight: true,
+      pauseOnHover: true,
+    });
   });
   </script>
 {% endblock javascript %}

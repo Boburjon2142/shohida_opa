@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.template.defaultfilters import title
 
-from .models import News, Category, Contact, Comment
+from .models import News, Category, Contact, Comment, Advertisement
 # Register your models here.
 
 
@@ -33,5 +33,11 @@ class CommentAdmin(admin.ModelAdmin):
         
     def activate_comments(self, request, queryset):
         queryset.update(active=True)
-        
-# admin.site.register(Comment, CommentAdmin)
+
+
+@admin.register(Advertisement)
+class AdvertisementAdmin(admin.ModelAdmin):
+    list_display = ['title', 'is_active', 'display_order', 'created_time']
+    list_filter = ['is_active']
+    search_fields = ['title']
+    ordering = ['display_order', '-created_time']

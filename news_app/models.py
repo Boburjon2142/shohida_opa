@@ -72,7 +72,24 @@ class Comment(models.Model):
     
 class ViewCount(models.Model):
     ip_adress = models.GenericIPAddressField()
- 
 
 
+
+class Advertisement(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='ads/', blank=True, null=True)
+    link = models.URLField(blank=True)
+    is_active = models.BooleanField(default=True)
+    display_order = models.PositiveIntegerField(default=0)
+    created_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['display_order', '-created_time']
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def has_image(self):
+        return bool(self.image)
  

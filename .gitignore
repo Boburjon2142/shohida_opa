@@ -1,0 +1,40 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.db
+db.sqlite3
+*.sqlite3
+*.log
+
+# Virtual envs
+venv/
+.venv/
+env/
+.env
+
+# Django static build / translations
+staticfiles/
+locale/*/LC_MESSAGES/*.mo
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# Tooling
+.coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+/.hypothesis/
+dist/
+build/
+
+# Custom temp files
+tmp_*.txt

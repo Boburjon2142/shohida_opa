@@ -53,7 +53,7 @@ a:hover, a:focus { color: var(--brand-primary); text-decoration: none; }
 /* Header auth buttons polish */
 .auth-actions .btn { 
   border-radius: 12px; 
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: none;
   font-weight: 700;
 }
 .auth-actions .btn i { margin-right: 6px; }
@@ -65,7 +65,7 @@ a:hover, a:focus { color: var(--brand-primary); text-decoration: none; }
 .auth-actions .btn-group .btn:last-child { border-top-right-radius: 999px !important; border-bottom-right-radius: 999px !important; }
 
 /* Specific looks */
-.btn-profile, .btn-logout { background: linear-gradient(135deg, #00a6c0, #5b43bf); border-color: #4a35a2; color: #fff; }
+.btn-profile, .btn-logout { background: linear-gradient(135deg, #00a6c0, #5b43bf); border-color: #4a35a2; color: #fff; box-shadow: none; }
 .btn-profile:hover, .btn-logout:hover { filter: brightness(1.06); }
 
 .btn-register {
@@ -213,6 +213,19 @@ a:hover, a:focus { color: var(--brand-primary); text-decoration: none; }
 .slick_slider .single_iteam img { width: 100%; height: clamp(260px, 48vw, 420px); object-fit: cover; }
 .slider_article { background: linear-gradient(180deg, rgba(0,166,192,0) 0%, rgba(91,67,191,.75) 80%); color: #fff; padding: 14px; }
 .slider_article .slider_tittle { color: #fff; }
+/* Slick arrows transparent */
+.slick-prev, .slick-next, .slick-arrow {
+  background: rgba(0, 0, 0, 0.2) !important; /* 20% */
+  border: none !important;
+  box-shadow: none !important;
+  opacity: 0.8 !important; /* 20% */
+}
+.slick-prev:before,
+.slick-next:before {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  font-size: 22px;
+}
 
 /* Latest post panel */
 .latest_post_container {

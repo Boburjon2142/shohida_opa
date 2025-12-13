@@ -13,8 +13,6 @@ from django.contrib.auth.models import User
 from hitcount.models import HitCount  # type: ignore
 from hitcount.views import HitCountMixin  # type: ignore
 
-
-
 # Create your views here.
 def news_list(request):
     news_list = News.published.all()
@@ -294,19 +292,10 @@ class SearchResultList(ListView):
         ctx['query'] = (self.request.GET.get('q') or '').strip()
         return ctx
 
-import requests
-from django.conf import settings
-
-def send_to_telegram(message):
-    token = settings.TELEGRAM_BOT_TOKEN
-    chat_id = settings.TELEGRAM_CHAT_ID
-    url = f"https://api.telegram.org/bot{token}/sendMessage"
-    data = {"chat_id": chat_id, "text": message}
-    requests.post(url, data=data)
-
 def contact_view(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        message = request.POST.get("message")
-        send_to_telegram(f"Yangi xabar!\nIsm: {name}\nXabar: {message}")
-    return render(request, "contact.html")
+        name = (request.POST.get("name") or "").strip()
+        message = (request.POST.get("message") or "").strip()
+        if name or message:
+            notify_telegram(f"Yangi xabar!\nIsm: {name}\nXabar: {message}")
+    return render(request, "news/contact.html")

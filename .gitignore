@@ -18,6 +18,7 @@ env/
 # Django static build / translations
 staticfiles/
 locale/*/LC_MESSAGES/*.mo
+*.pot
 
 # IDE / OS
 .vscode/
@@ -26,6 +27,9 @@ locale/*/LC_MESSAGES/*.mo
 *.swo
 *.DS_Store
 Thumbs.db
+
+# User uploads
+media/
 
 # Tooling
 .coverage
@@ -38,3 +42,7 @@ build/
 
 # Custom temp files
 tmp_*.txt
+
+# Backups / patches
+*.orig
+*.bak

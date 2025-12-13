@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
+from dotenv import load_dotenv
 from pathlib import Path
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +26,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5e%^i=8t5nu#ntfnl8@0&!%-a*4cn)w(e1bv1b20qbe!ud^i2a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Default to True for local dev; override with env DJANGO_DEBUG=false in prod.
+DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = []
+# Allowlist for host headers (set env DJANGO_ALLOWED_HOSTS to comma-separated list)
+default_hosts = ["127.0.0.1", "localhost"]
+env_hosts = os.getenv("DJANGO_ALLOWED_HOSTS")
+if env_hosts:
+    default_hosts.extend([h.strip() for h in env_hosts.split(",") if h.strip()])
+ALLOWED_HOSTS = default_hosts
 
 
 # Application definition
@@ -155,11 +164,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 LOGIN_URL = 'login'
 
-
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-TELEGRAM_BOT_TOKEN = os.getenv("8443867801:AAGCzTQxNlWZ1kjNvfRpEDFW3O9aOJOp1DE")
-TELEGRAM_CHAT_ID = os.getenv("6622225691")
+# Security flags (use env to toggle in production)
+SESSION_COOKIE_SECURE = os.getenv("DJANGO_SECURE_COOKIES", "False").lower() == "true"
+CSRF_COOKIE_SECURE = SESSION_COOKIE_SECURE
+SECURE_SSL_REDIRECT = os.getenv("DJANGO_SECURE_SSL_REDIRECT", "False").lower() == "true"
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")

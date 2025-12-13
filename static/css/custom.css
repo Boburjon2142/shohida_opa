@@ -379,21 +379,21 @@ a:hover, a:focus { color: var(--brand-primary); text-decoration: none; }
 .tag_nav li { list-style: none; }
 .tag_nav li a {
   display: block;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--card-border);
-  background: #f8f9fb;
+  padding: 6px 8px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
   color: #0f1b2b;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  text-align: center;
-  transition: all .2s ease;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  text-align: left;
+  transition: color .2s ease;
+  text-decoration: none;
 }
 .tag_nav li a:hover {
-  border-color: var(--brand-primary);
-  color: #fff;
-  background: linear-gradient(135deg, var(--brand-secondary), var(--brand-primary));
+  color: var(--brand-primary);
+  text-decoration: underline;
 }
 
 /* Buttons consistency */

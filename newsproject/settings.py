@@ -13,10 +13,9 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 
-load_dotenv()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,15 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5e%^i=8t5nu#ntfnl8@0&!%-a*4cn)w(e1bv1b20qbe!ud^i2a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Default to True for local dev; override with env DJANGO_DEBUG=false in prod.
-DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
+# Default to False; enable explicitly via env for local dev.
+DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
 
 # Allowlist for host headers (set env DJANGO_ALLOWED_HOSTS to comma-separated list)
-default_hosts = ["127.0.0.1", "localhost"]
-env_hosts = os.getenv("DJANGO_ALLOWED_HOSTS")
-if env_hosts:
-    default_hosts.extend([h.strip() for h in env_hosts.split(",") if h.strip()])
-ALLOWED_HOSTS = default_hosts
+env_hosts = os.getenv("DJANGO_ALLOWED_HOSTS", "")
+ALLOWED_HOSTS = [h.strip() for h in env_hosts.split(",") if h.strip()]
 
 
 # Application definition
@@ -54,7 +50,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.gzip.GZipMiddleware',  # compress responses
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -151,16 +146,15 @@ LOCALE_PATHS = [BASE_DIR / 'locale']
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# Use absolute paths for shared hosting (override with env if needed).
+STATIC_ROOT = Path(os.getenv("DJANGO_STATIC_ROOT", BASE_DIR / 'staticfiles'))
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-WHITENOISE_MAX_AGE = 60 * 60 * 24 * 30  # 30 days
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = Path(os.getenv("DJANGO_MEDIA_ROOT", BASE_DIR / 'media'))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

@@ -12,6 +12,9 @@ db.sqlite3
 *.log
 .coverage
 .coverage.*
+*.egg-info/
+pip-wheel-metadata/
+htmlcov/
 
 # Virtual envs
 venv/
@@ -19,6 +22,7 @@ venv/
 env/
 .env
 .env.*
+.envrc
 
 # Django static build / translations
 staticfiles/
@@ -37,13 +41,17 @@ Thumbs.db
 media/
 
 # Tooling
-.coverage
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 /.hypothesis/
 dist/
 build/
+.cache/
+.tox/
+.nox/
+.pytype/
+.python-version
 
 # Custom temp files
 tmp_*.txt
@@ -51,3 +59,20 @@ tmp_*.txt
 # Backups / patches
 *.orig
 *.bak
+
+# Secrets / certificates
+*.pem
+*.key
+*.crt
+*.pfx
+*.p12
+*.kdbx
+*.secret
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
